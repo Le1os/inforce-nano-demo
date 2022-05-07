@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ListGroup, Button, Modal, Image } from "react-bootstrap";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { actionCreators } from "../store/actions";
 
 export default function InListItem({ item, index }) {
@@ -9,6 +9,7 @@ export default function InListItem({ item, index }) {
   const [name, setName] = useState(item.value.name);
   const [weight, setWeight] = useState(item.value.weight);
   const [count, setCount] = useState(item.value.count);
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow  = () => setShow(true);
@@ -19,9 +20,15 @@ export default function InListItem({ item, index }) {
   
   const handleItemCountChange = event => setCount(event.target.value);
 
-  const changeItem = index => {
-    dispatch(actionCreators.addToList(index));
+  const changeItem = () => {
+    dispatch(actionCreators.editItem({
+      id: item.value.id,
+      name: name,
+      weight: weight,
+      count: count
+    }));
   };
+
 
   return (
     <ListGroup.Item
@@ -75,7 +82,7 @@ export default function InListItem({ item, index }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={changeItem}>
+          <Button variant="primary" onClick={changeItem && handleClose}>
             Save Item
           </Button>
         </Modal.Footer>

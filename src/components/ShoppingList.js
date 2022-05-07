@@ -8,15 +8,7 @@ export default function ShoppingList() {
 
   return (
     <ListGroup className="m-4" variant="flush">
-      {items.map((item, index) => {
-        return <InListItem item={item} index={index} />
-        // item.inBasket ? (
-        //   <InBasketItem item={item} index={index} />
-        // ) : 
-        
-        // (
-        // );
-      })}
+      {items.map((item, index) => <InListItem item={item} index={index}/>)}
     </ListGroup>
   );
 }
